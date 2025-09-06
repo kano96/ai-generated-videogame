@@ -4,8 +4,7 @@ import {generateText} from "ai";
 import {type NextRequest,  NextResponse} from 'next/server';
 
 import { GAME_PROMPTS } from "@/lib/prompts";
-import { GAME_CONFIG } from '@/lib/constants';
-import { GenerateImageRequest, GenerateStoryRequest } from '@/lib/types';
+import { GenerateImageRequest } from '@/lib/types';
 
 
 export async function POST(request: NextRequest) {
@@ -23,9 +22,6 @@ export async function POST(request: NextRequest) {
                 }
             }
         });
-
-        console.log("Generated image files:", files);
-
 
         return NextResponse.json({image: files?.[0] || null});
     } catch (error) {
