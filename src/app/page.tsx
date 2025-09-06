@@ -1,39 +1,20 @@
 'use client';
 
-import { useEffect } from "react";
+import { useZombieGame } from "./hooks/use-zombie-game";
+import GameLoader from "./componentes/GameLoader";
+import GameMessage from "./componentes/GameMessage";
 
 export default function Home() {
 
-  useEffect(() => {
-    fetch('/api/generate-story', {
-      method: 'POST',
-      body: JSON.stringify({
-        userMessage: "Look around",
-        conversationHistory: [],
-        isStart: true
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        fetch('/api/generate-image', {
-          method: 'POST',
-          body: JSON.stringify({
-            imagePrompt: data.imagePrompt
-          })
-        })
-          .then(res => res.json())
-          .then(imageData => {
-            console.log("Story data:", data);
-            console.log("Image data:", imageData);
-          }
-          );
-      });
-  }, [])
+  const { handleInputChange, handleSubmit, messages, isLoading, input } = useZombieGame();
 
 
   return (
-    <div className="font-sans min-h-screen p-8">
-      Zombie apocalypse game
+    <div className="font-sans min-h-screen p-8 max-w-xl mx-auto">
+      {isLoading && <GameLoader />}
+      {messages.map((msg, index) => (
+        <GameMessage key={index} message={msg} />
+      ))}
     </div>
   );
 }
