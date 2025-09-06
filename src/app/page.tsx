@@ -12,7 +12,7 @@ export default function Home() {
 
 
   return (
-    <div className="font-sans min-h-screen p-8 max-w-xl mx-auto">
+    <div className="font-sans h-screen mx-auto overflow-hidden">
       <div className="flex flex-col h-full">
         <Conversation>
           <ConversationContent className="max-w-xl mx-auto">
@@ -24,7 +24,7 @@ export default function Home() {
           <ConversationScrollButton />
         </Conversation>
 
-        <div className="max-w-2xl mx-auto pb-4">
+        <div className="max-w-2xl w-full mx-auto pb-4">
           <GameInput
             input={input}
             onInputChange={handleInputChange}
